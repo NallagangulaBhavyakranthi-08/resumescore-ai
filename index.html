@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#19134f">
+  <meta name="description" content="Analyze your resume against a target role with evidence-based AI feedback.">
+  <title>ResumeScore AI — Intelligent Resume Analyzer</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="ResumeScore AI home">
+        <span class="brand-mark">R</span>
+        <span><strong>ResumeScore</strong><small>AI CAREER COPILOT</small></span>
+      </a>
+      <p class="nav-caption">WORKSPACE</p>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#dashboard"><span class="nav-icon">⌂</span> Dashboard</a>
+        <a class="nav-link" href="#analyzer"><span class="nav-icon">◈</span> Resume Analyzer</a>
+        <p class="nav-caption">YOUR REPORT</p>
+        <a class="nav-link" href="#skills"><span class="nav-icon">✳</span> Skills Analysis</a>
+        <a class="nav-link" href="#experience"><span class="nav-icon">▤</span> Experience Analysis</a>
+        <a class="nav-link" href="#timeline"><span class="nav-icon">↔</span> Employment Timeline</a>
+        <a class="nav-link" href="#location"><span class="nav-icon">⌖</span> Location Match</a>
+        <a class="nav-link" href="#improvements"><span class="nav-icon">✎</span> Resume Improvements</a>
+        <a class="nav-link" href="#history"><span class="nav-icon">◷</span> Analysis History</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <a class="nav-link" href="#settings"><span class="nav-icon">⚙</span> Settings & privacy</a>
+        <div class="privacy-note"><span class="privacy-dot"></span><span>Your resume stays on this device and is sent only for your requested analysis.</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong>Dashboard</strong></div>
+        <div class="topbar-right"><span class="secure-pill"><span>●</span> Private analysis</span><div class="avatar">RS</div></div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="welcome-row" id="dashboard">
+          <div>
+            <p class="eyebrow">YOUR CAREER, CLEARER</p>
+            <h1>Analyze your resume.<br><span>Move your career forward.</span></h1>
+            <p class="welcome-copy">Get specific, evidence-based feedback matched to the role you want.</p>
+          </div>
+          <a class="primary-button compact" href="#analyzer">Start an analysis <span>→</span></a>
+        </section>
+
+        <section class="analysis-layout" id="analyzer">
+          <div class="form-column">
+            <div class="section-heading">
+              <div><p class="eyebrow">GET STARTED</p><h2>Resume analysis</h2></div>
+              <span class="step-badge">01 <i>/ 02</i></span>
+            </div>
+            <form id="analysisForm">
+              <label class="field-label" for="resumeFile">Your resume <span>PDF, DOCX or TXT · 5 MB max</span></label>
+              <label class="upload-box" id="uploadBox" for="resumeFile">
+                <input id="resumeFile" name="file" type="file" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
+                <span class="upload-icon">↑</span>
+                <strong id="uploadTitle">Drop your resume here or <em>browse files</em></strong>
+                <small id="uploadSub">Your document is processed for this request only.</small>
+              </label>
+              <div class="or-divider"><span>OR PASTE RESUME TEXT</span></div>
+              <label class="sr-only" for="resumeText">Resume text</label>
+              <textarea id="resumeText" name="resume_text" rows="5" placeholder="Paste your resume text here..."></textarea>
+
+              <div class="form-divider"></div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label" for="targetJobTitle">Target job title <small>Optional</small></label>
+                  <input id="targetJobTitle" name="target_job_title" type="text" placeholder="e.g. Product Designer">
+                </div>
+                <div class="field">
+                  <label class="field-label" for="jobLocation">Job location <small>Optional</small></label>
+                  <input id="jobLocation" name="job_location" type="text" placeholder="e.g. Remote, Toronto">
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label" for="preferredLocation">Your preferred location <small>Optional</small></label>
+                  <input id="preferredLocation" name="preferred_location" type="text" placeholder="e.g. Remote, Toronto">
+                </div>
+                <div class="field">
+                  <label class="field-label" for="workArrangement">Work arrangement <small>Optional</small></label>
+                  <select id="workArrangement" name="work_arrangement">
+                    <option value="">Select preference</option>
+                    <option>Remote</option><option>Hybrid</option><option>On-site</option><option>Flexible</option>
+                  </select>
+                </div>
+              </div>
+              <label class="field-label" for="jobDescription">Job description <span>Optional, but recommended</span></label>
+              <textarea id="jobDescription" name="job_description" rows="5" placeholder="Paste the job description to get a tailored comparison..."></textarea>
+              <p class="form-hint">Scores are based on the information provided. Unavailable details are not guessed.</p>
+              <button class="primary-button analyze-button" id="analyzeButton" type="submit"><span>Analyze my resume</span><span class="button-arrow">→</span></button>
+              <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+
+          <aside class="preview-column">
+            <div class="preview-card">
+              <div class="preview-head"><div><p class="eyebrow">DOCUMENT</p><h3>Resume preview</h3></div><span class="file-type" id="fileType">EMPTY</span></div>
+              <div class="preview-body" id="previewBody">
+                <div class="empty-document"><span>▤</span><strong>Your resume will appear here</strong><p>Upload a PDF, DOCX, or TXT file to preview it.</p></div>
+              </div>
+              <div class="preview-footer"><span id="fileMeta">No document selected</span><a id="downloadResume" href="#" download hidden>Download</a></div>
+            </div>
+            <div class="tip-card"><span class="tip-star">✦</span><div><strong>Make it specific</strong><p>Add a job description for more relevant skills and keyword feedback.</p></div></div>
+          </aside>
+        </section>
+
+        <section class="results-section" id="results" hidden>
+          <div class="section-heading result-heading">
+            <div><p class="eyebrow">YOUR PERSONALIZED REPORT</p><h2>Analysis results</h2></div>
+            <button class="secondary-button" id="downloadReport">↓ <span>Download report</span></button>
+          </div>
+          <div class="score-overview card">
+            <div class="overall-score-wrap">
+              <div class="score-ring" id="overallRing"><div><strong id="overallScore">—</strong><span>OUT OF 100</span></div></div>
+              <div><p class="eyebrow">OVERALL RESUME SCORE</p><h3 id="scoreLabel">Analysis complete</h3><p class="score-caption" id="scoreCaption"></p></div>
+            </div>
+            <div class="score-categories" id="scoreCategories"></div>
+          </div>
+          <div class="report-grid">
+            <section class="report-card card" id="skills"><div class="card-title"><span class="small-icon violet">✳</span><div><p class="eyebrow">MATCH & OPPORTUNITY</p><h3>Skills analysis</h3></div></div><div id="skillsContent" class="report-content"></div></section>
+            <section class="report-card card" id="experience"><div class="card-title"><span class="small-icon blue">▤</span><div><p class="eyebrow">EVIDENCE IN YOUR STORY</p><h3>Experience analysis</h3></div></div><div id="experienceContent" class="report-content"></div></section>
+            <section class="report-card card" id="timeline"><div class="card-title"><span class="small-icon teal">↔</span><div><p class="eyebrow">DATES & CLARITY</p><h3>Employment timeline</h3></div></div><div id="timelineContent" class="report-content"></div></section>
+            <section class="report-card card" id="location"><div class="card-title"><span class="small-icon orange">⌖</span><div><p class="eyebrow">ROLE PREFERENCES</p><h3>Location match</h3></div></div><div id="locationContent" class="report-content"></div></section>
+            <section class="report-card card full-width" id="improvements"><div class="card-title"><span class="small-icon violet">✎</span><div><p class="eyebrow">NEXT BEST STEPS</p><h3>Resume improvements</h3></div></div><div id="improvementsContent" class="report-content"></div></section>
+          </div>
+        </section>
+
+        <section class="history-section card" id="history">
+          <div class="section-heading history-heading"><div><p class="eyebrow">ON THIS DEVICE</p><h2>Recent analyses</h2></div><button class="text-button" id="clearHistory" hidden>Clear history</button></div>
+          <div id="historyList" class="history-list"><div class="history-empty"><span>◷</span><p>Your analyses will appear here after your first report.</p></div></div>
+        </section>
+
+        <section class="settings-section" id="settings">
+          <p>Privacy note</p><span>Resume files and text are not saved on the server or in your browser history list. Analysis summaries are stored locally on this device so you can revisit them; clear them any time.</span>
+        </section>
+        <footer class="page-footer"><span>ResumeScore AI</span><span>Thoughtful feedback, grounded in your experience.</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/script.js" defer></script>
+</body>
+</html>
